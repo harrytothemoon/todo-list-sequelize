@@ -6,8 +6,10 @@ const home = require('./modules/home')
 const todos = require('./modules/todos')
 const users = require('./modules/user')
 
+const { authenticator } = require('../middleware/auth')
+
 router.use('/users', users)
-router.use('/todos', todos)
-router.use('/', home)
+router.use('/todos', authenticator, todos)
+router.use('/', authenticator, home)
 // 匯出路由器
 module.exports = router
